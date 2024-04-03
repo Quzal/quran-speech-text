@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# quran-speech-text
-This Project analyze the Quran recitation and find its references in Quran
-=======
 # Analyze Quran Recitation and find references to Verses
 
 ### How to Run
@@ -23,4 +19,3 @@ Install Google Cloud cli in your system Follow this document  https://cloud.goog
 run gcloud init commands after installtion -- Choose you google project
 
 Run command : gcloud auth application-default login
->>>>>>> master
