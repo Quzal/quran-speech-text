@@ -105,15 +105,7 @@ const recognizeStream = client
         const filePath = 'quran-simple-clean.txt'; // Path to your text file
         const word = data.results[0].alternatives[0].transcript
         
-        const matches = findWordInFile(filePath, word);
-        // if (matches.length > 0) {
-        //     console.log(`Found '${word}' in the following lines:`);
-        //     matches.forEach(match => {
-        //         console.log(`Line ${match.line}: ${match.content}`);
-        //     });
-        // } else {
-        //     console.log(`'${word}' not found in the file.`);
-        // }
+        findWordInFile(filePath, word);
       }
   }
   );
