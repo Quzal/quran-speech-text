@@ -18,35 +18,10 @@ const request = {
   config: {
     encoding: "LINEAR16",
     sampleRateHertz: 16000,
-    languageCode: "ar-LB",
+    languageCode: "ar-EG",
   },
   interimResults: false, // If you want interim results, set this to true
 };
-
-function jaccardIndex(str1, str2) {
-    // Convert strings to sets of characters
-    const set1 = new Set(str1);
-    const set2 = new Set(str2);
-
-    // Calculate the intersection (common characters)
-    const intersection = new Set([...set1].filter(char => set2.has(char)));
-
-    // Calculate the union (total unique characters)
-    const union = new Set([...set1, ...set2]);
-
-    // Calculate Jaccard index
-    const jaccardIndex = intersection.size / union.size;
-
-    // Convert index to percentage
-    const percentage = Math.round(jaccardIndex * 100);
-
-    return percentage;
-}
-
-function hasCertainCharacters(str, characters) {
-    const regex = new RegExp(`[${characters}]`);
-    return regex.test(str);
-}
 
 function hasSpecificKeywords(str, keywords) {
     const regex = new RegExp(keywords.join('|'), 'i'); // 'i' flag for case-insensitive matching
@@ -55,11 +30,8 @@ function hasSpecificKeywords(str, keywords) {
 
 function keywordMatchPercentage(str, keyword) {
     const keywordCount = (str.match(new RegExp(keyword, 'gi')) || []).length;
-    // console.log("-----------",keywordCount)
     const totalWords = str.split(/\s+/).length;
-    // console.log("...........", totalWords)
     const percentage = (keywordCount / totalWords) * 100;
-    // console.log("///////////////////", percentage)
     return percentage; // Round to 2 decimal places
 }
 
@@ -76,13 +48,13 @@ function findWordInFile(filePath, word) {
 
             let percentage = 0
             kalima.forEach((lfz,index)=>{
-                percentage = percentage + parseInt(keywordMatchPercentage(line,lfz))
+                percentage = percentage + keywordMatchPercentage(line,lfz)
                 
             })
             if (percentage >= 50){
                 matches.push({percentage,line : lineNumber+1, content: line})
                 matches.sort((a, b) => a.percentage - b.percentage)
-                console.log(".....................................", matches)
+                console.log(".........Matches..........", matches)
             }
         }
     });
